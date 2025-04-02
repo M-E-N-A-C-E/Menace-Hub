@@ -1,1 +1,110 @@
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
 
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 300, 0, 200)
+MainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BackgroundTransparency = 0.5
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 10)
+UICorner.Parent = MainFrame
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -40, 0, 10)
+CloseButton.Text = "X"
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 18
+CloseButton.Parent = MainFrame
+
+local UICornerClose = Instance.new("UICorner")
+UICornerClose.CornerRadius = UDim.new(0, 10)
+UICornerClose.Parent = CloseButton
+
+local TitleText = Instance.new("TextLabel")
+TitleText.Text = "Choose a Key System"
+TitleText.Size = UDim2.new(0, 300, 0, 30)
+TitleText.Position = UDim2.new(0, 0, 0, 40)
+TitleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleText.TextSize = 20
+TitleText.BackgroundTransparency = 1
+TitleText.Parent = MainFrame
+
+local KeyRblxButton = Instance.new("TextButton")
+KeyRblxButton.Size = UDim2.new(0, 280, 0, 40)
+KeyRblxButton.Position = UDim2.new(0, 10, 0, 80)
+KeyRblxButton.Text = "KEYRBLX (GOOD)"
+KeyRblxButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+KeyRblxButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeyRblxButton.TextSize = 18
+KeyRblxButton.Parent = MainFrame
+
+local UICornerKeyRblx = Instance.new("UICorner")
+UICornerKeyRblx.CornerRadius = UDim.new(0, 10)
+UICornerKeyRblx.Parent = KeyRblxButton
+
+local OrText = Instance.new("TextLabel")
+OrText.Text = "OR"
+OrText.Size = UDim2.new(0, 300, 0, 30)
+OrText.Position = UDim2.new(0, 0, 0, 120)
+OrText.TextColor3 = Color3.fromRGB(255, 255, 255)
+OrText.TextSize = 18
+OrText.BackgroundTransparency = 1
+OrText.Parent = MainFrame
+
+local PandaButton = Instance.new("TextButton")
+PandaButton.Size = UDim2.new(0, 280, 0, 40)
+PandaButton.Position = UDim2.new(0, 10, 0, 150)
+PandaButton.Text = "PANDA (BEST)"
+PandaButton.BackgroundColor3 = Color3.fromRGB(0, 204, 255)
+PandaButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PandaButton.TextSize = 18
+PandaButton.Parent = MainFrame
+
+local UICornerPanda = Instance.new("UICorner")
+UICornerPanda.CornerRadius = UDim.new(0, 10)
+UICornerPanda.Parent = PandaButton
+
+local dragging = false
+local dragInput, mousePos, framePos
+
+MainFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragInput = input
+		mousePos = input.Position
+		framePos = MainFrame.Position
+	end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
+		local delta = input.Position - mousePos
+		MainFrame.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+	end
+end)
+
+MainFrame.InputEnded:Connect(function(input)
+	if input == dragInput then
+		dragging = false
+	end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+	ScreenGui:Destroy()
+end)
+
+KeyRblxButton.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/M-E-N-A-C-E/Menace-Hub/refs/heads/main/KEYRBLX", true))()
+	ScreenGui:Destroy()
+end)
+
+PandaButton.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/M-E-N-A-C-E/Menace-Hub/refs/heads/main/PANDA", true))()
+	ScreenGui:Destroy()
+end)
