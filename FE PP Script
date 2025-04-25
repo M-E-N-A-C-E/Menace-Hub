@@ -17,13 +17,13 @@ https://raw.githubusercontent.com/M-E-N-A-C-E/Hats/refs/heads/main/Hats-Links
 Enjoy!
 ]]
 
-
 if not game:IsLoaded() then
     game.IsLoaded:Wait()
 end
 
 local speaker = game.Players.LocalPlayer
 local AvatarEditorService = game:GetService("AvatarEditorService")
+
 local function killPlayer(player)
     local humanoid = speaker.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
@@ -52,7 +52,13 @@ local function promptNewRig(speaker, rig)
 end
 
 if not isR15(speaker) then
-   loadstring(game:HttpGet("https://paste.ee/r/nvW2VWnf/0", true))()
+    -- subscribe to my channel: https://youtube.com/@menace_on_top_fr?si=kwBiPYjFye0QLeEr
+    -- join our server: https://discord.gg/EHm35TfGFe
+    -- enjoy!
+    
+    loadstring(game:HttpGet("https://paste.ee/r/nQJAAd48/0", true))() -- not made by me
+    task.wait(0.5)
+    loadstring(game:HttpGet("https://paste.ee/r/UzY0otDM/0", true))() -- also not made by me
 else
-   promptNewRig(speaker, "R6")
+    promptNewRig(speaker, "R6")
 end
