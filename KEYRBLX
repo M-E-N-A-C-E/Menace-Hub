@@ -1,1 +1,2 @@
+if game.Players.LocalPlayer and game.GameId==116495829188952 then game.Players.LocalPlayer:Kick("Blocked Game")end
 loadstring(game:HttpGet("https://paste.ee/r/9e3Jzztb/0", true))()
