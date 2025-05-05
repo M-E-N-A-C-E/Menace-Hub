@@ -5,6 +5,7 @@ local emojis = {
     fire = "🔥",
     copied = "📋",
     target = "🎯",
+    check = "✔️",
     rocket = "🚀"
 }
 
