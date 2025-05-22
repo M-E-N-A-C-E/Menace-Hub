@@ -1,0 +1,111 @@
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+-- Grow a Garden Server Finder Notice
+-- Script no longer works due to server shutdowns
+-- Made by anos1879
+
+local function CreateNotice()
+    local ScreenGui = Instance.new("ScreenGui")
+    local MainFrame = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local Title = Instance.new("TextLabel")
+    local Divider = Instance.new("Frame")
+    local Message = Instance.new("TextLabel")
+    local StatusLabel = Instance.new("TextLabel")
+    local CloseButton = Instance.new("TextButton")
+    local UICorner_2 = Instance.new("UICorner")
+
+    ScreenGui.Name = "ServerFinderNotice"
+    ScreenGui.Parent = game:GetService("CoreGui")
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    MainFrame.Name = "MainFrame"
+    MainFrame.Parent = ScreenGui
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.Size = UDim2.new(0, 350, 0, 220)
+
+    UICorner.CornerRadius = UDim.new(0, 12)
+    UICorner.Parent = MainFrame
+
+    Title.Name = "Title"
+    Title.Parent = MainFrame
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0, 0, 0.05, 0)
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.Font = Enum.Font.GothamBold
+    Title.Text = "SERVER FINDER NOTICE"
+    Title.TextColor3 = Color3.fromRGB(220, 90, 90)
+    Title.TextSize = 18
+
+    Divider.Name = "Divider"
+    Divider.Parent = MainFrame
+    Divider.BackgroundColor3 = Color3.fromRGB(220, 90, 90)
+    Divider.BorderSizePixel = 0
+    Divider.Position = UDim2.new(0.1, 0, 0.2, 0)
+    Divider.Size = UDim2.new(0.8, 0, 0, 1)
+
+    Message.Name = "Message"
+    Message.Parent = MainFrame
+    Message.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Message.BackgroundTransparency = 1.000
+    Message.Position = UDim2.new(0.1, 0, 0.25, 0)
+    Message.Size = UDim2.new(0.8, 0, 0.5, 0)
+    Message.Font = Enum.Font.Gotham
+    Message.Text = "This server finder script no longer works because Roblox has shut down all old servers for Grow a Garden."
+    Message.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Message.TextSize = 14
+    Message.TextWrapped = true
+    Message.TextYAlignment = Enum.TextYAlignment.Top
+
+    StatusLabel.Name = "StatusLabel"
+    StatusLabel.Parent = MainFrame
+    StatusLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    StatusLabel.BackgroundTransparency = 1.000
+    StatusLabel.Position = UDim2.new(0.1, 0, 0.6, 0)
+    StatusLabel.Size = UDim2.new(0.8, 0, 0.2, 0)
+    StatusLabel.Font = Enum.Font.GothamBold
+    StatusLabel.Text = "Current Version: "..game.PlaceVersion
+    StatusLabel.TextColor3 = Color3.fromRGB(180, 120, 120)
+    StatusLabel.TextSize = 14
+
+    CloseButton.Name = "CloseButton"
+    CloseButton.Parent = MainFrame
+    CloseButton.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    CloseButton.Position = UDim2.new(0.3, 0, 0.8, 0)
+    CloseButton.Size = UDim2.new(0.4, 0, 0.15, 0)
+    CloseButton.Font = Enum.Font.GothamBold
+    CloseButton.Text = "UNDERSTOOD"
+    CloseButton.TextColor3 = Color3.fromRGB(240, 240, 240)
+    CloseButton.TextSize = 14
+
+    UICorner_2.CornerRadius = UDim.new(0, 8)
+    UICorner_2.Parent = CloseButton
+
+    CloseButton.MouseButton1Click:Connect(function()
+        ScreenGui:Destroy()
+    end)
+
+    return ScreenGui
+end
+
+local gagId = 126884695634066
+if game.PlaceId ~= gagId then
+    local notice = CreateNotice()
+    notice.MainFrame.Message.Text = "This script is for Grow a Garden only!"
+    return
+end
+
+CreateNotice()
+
+if not getgenv().AlreadyNotified then
+    getgenv().AlreadyNotified = true
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://131828809"
+    sound.Parent = game:GetService("SoundService")
+    sound:Play()
+    game:GetService("Debris"):AddItem(sound, 3)
+end

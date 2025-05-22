@@ -1,0 +1,64 @@
+--[[
+Subscribe to my channel:  
+https://youtube.com/@menace_on_top_fr?si=kwBiPYjFye0QLeEr  
+
+Join our Discord server:  
+https://discord.gg/EHm35TfGFe  
+
+Use BTRoblox to equip multiple accessories:  
+https://chromewebstore.google.com/detail/btroblox-making-roblox-be/hbkpclpemjeibhioopcebchdmohaieln?pli=1  
+
+For mobile users, use Kiwi Browser:  
+https://play.google.com/store/apps/details?id=com.kiwibrowser.browser  
+
+Get the hats here:  
+https://raw.githubusercontent.com/M-E-N-A-C-E/Hats/refs/heads/main/Hats-Links  
+
+Enjoy!
+]]
+
+if not game:IsLoaded() then
+    game.IsLoaded:Wait()
+end
+
+local speaker = game.Players.LocalPlayer
+local AvatarEditorService = game:GetService("AvatarEditorService")
+
+local function killPlayer(player)
+    local humanoid = speaker.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+        humanoid.Health = 0
+    end
+end
+    
+function isR6(player)
+    return player.Character:FindFirstChild("Torso") ~= nil
+end
+
+function isR15(player)
+    return player.Character:FindFirstChild("UpperTorso") ~= nil and player.Character:FindFirstChild("LowerTorso") ~= nil
+end
+
+local function promptNewRig(speaker, rig)
+    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        AvatarEditorService:PromptSaveAvatar(humanoid.HumanoidDescription, Enum.HumanoidRigType[rig])
+        local result = AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+        if result == Enum.AvatarPromptResult.Success then
+            killPlayer(speaker)
+        end
+    end
+end
+
+if not isR15(speaker) then
+    -- subscribe to my channel: https://youtube.com/@menace_on_top_fr?si=kwBiPYjFye0QLeEr
+    -- join our server: https://discord.gg/EHm35TfGFe
+    -- enjoy!
+    
+    loadstring(game:HttpGet("https://paste.ee/r/nQJAAd48/0", true))() -- not made by me
+    task.wait(0.5)
+    loadstring(game:HttpGet("https://paste.ee/r/UzY0otDM/0", true))() -- also not made by me
+else
+    promptNewRig(speaker, "R6")
+end
