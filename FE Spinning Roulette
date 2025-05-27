@@ -60,6 +60,9 @@ local function createNoticeGUI()
     DiscordBtn.MouseButton1Click:Connect(function()
         setclipboard("https://discord.gg/aN8n58FgyD")
         DiscordBtn.Text = "COPIED!"
+        wait(2)
+        game.Players.LocalPlayer:Kick("Join our discord server! Link in your clipboard.")
+
         task.delay(1.5, function() DiscordBtn.Text = "COPY DISCORD LINK" end)
     end)
 end
