@@ -6,5 +6,6 @@ return {
     "leftgamer404",
     "crossxyy",
     "Usjdjdn747",
+    "Weesoonlies",
     "Diego29wi"
 }
