@@ -49,11 +49,6 @@ folder:AddBind({
 	callback = function() end
 })
 
-folder:AddLabel({
-	text = "Made by airbornite and dementia enjoyer",
-	type = "label"
-})
-
 folder:AddButton({
 	text = "Copy Discord Link (Lunacy)",
 	flag = "button",
