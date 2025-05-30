@@ -42,11 +42,6 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
-folder:AddLabel({
-	text = "You need someone to equip a valuable pet in the server.",
-	type = "label"
-})
-
 folder:AddButton({
 	text = "Copy Discord Link (Lunacy)",
 	flag = "button",
