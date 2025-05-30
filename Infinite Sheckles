@@ -4,8 +4,8 @@
 setclipboard("https://youtube.com/@menace_on_top_fr")
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/liebertsx/Tora-Library/main/src/librarynew",true))()
-local tab = library:CreateWindow("Infinite Sheckles (Dupe)")
-local folder = tab:AddFolder("Folder")
+local tab = library:CreateWindow("Infinite Sheckles")
+local folder = tab:AddFolder("Here")
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -17,7 +17,7 @@ local SELL_DELAY = 0.1
 local Sold = tick()
 
 folder:AddToggle({
-	text = "Toggle Infinite Sheckles",
+	text = "Toggle Inf Sheckles",
 	flag = "toggle",
 	callback = function(v)
 		running = v
@@ -42,11 +42,9 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
-folder:AddBind({
-	text = "bind",
-	key = "X",
-	hold = false,
-	callback = function() end
+folder:AddLabel({
+	text = "You need someone to equip a valuable pet in the server.",
+	type = "label"
 })
 
 folder:AddButton({
