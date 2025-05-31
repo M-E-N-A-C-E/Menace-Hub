@@ -170,7 +170,7 @@ function nt(n, c)
         Time = 6
     })
 end
-_G.patched = true
+_G.patched = false
 if _G.patched then
    nt("PATCHED","Dupe Sheckles has been patched and it won't work now.")
    nt("NOTICE","We'll come back soon once a new bug or script has been found!")
