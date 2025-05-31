@@ -170,6 +170,13 @@ function nt(n, c)
         Time = 6
     })
 end
+_G.patched = true
+if _G.patched then
+   nt("🔴PATCHDD🔴","Dupe Sheckles has been patched and it won't work now.")
+   nt("🟢Notice🟢","We'll come back soon once a new bug or script has been foudn!")
+   return
+end
+
 local gagid = 126884695634066
 if game.PlaceId ~= gagid then
    nt("Wrong Game", "This script is for Grow a Garden only!")
