@@ -172,8 +172,8 @@ function nt(n, c)
 end
 _G.patched = true
 if _G.patched then
-   nt("🔴PATCHDD🔴","Dupe Sheckles has been patched and it won't work now.")
-   nt("🟢Notice🟢","We'll come back soon once a new bug or script has been foudn!")
+   nt("PATCHED","Dupe Sheckles has been patched and it won't work now.")
+   nt("NOTICE","We'll come back soon once a new bug or script has been found!")
    return
 end
 
