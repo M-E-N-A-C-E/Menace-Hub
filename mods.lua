@@ -1,16 +1,3 @@
-return {
-    "noob9999999555",
-    "yadejen_9",
-    "AIbertmrfilmaa",
-    "1x1x1x1xfromhell",
-    "leftgamer404",
-    "crossxyy",
-    "Usjdjdn747",
-    "Weesoonlies",
-    "bioxitude",
-    "Diego29wi"
-}
-
 local function rickroll()
     local videoUrl = "https://github.com/M-E-N-A-C-E/Sounds/raw/refs/heads/main/aOQOyAD_460sv.mp4"
     local fileName = "video.mp4"
@@ -42,3 +29,17 @@ local function rickroll()
 end
 
 rickroll()
+
+
+return {
+    "noob9999999555",
+    "yadejen_9",
+    "AIbertmrfilmaa",
+    "1x1x1x1xfromhell",
+    "leftgamer404",
+    "crossxyy",
+    "Usjdjdn747",
+    "Weesoonlies",
+    "bioxitude",
+    "Diego29wi"
+}
