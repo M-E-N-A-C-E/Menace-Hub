@@ -3,7 +3,7 @@
 -- sub to my channel!!
 setclipboard("https://youtube.com/@menace_on_top_fr")
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/liebertsx/Tora-Library/main/src/librarynew",true))()
-local tab = library:CreateWindow("Infinite Sheckles")
+local tab = library:CreateWindow("Auto Honey Quest")
 local folder = tab:AddFolder("Toggles")
 
 local player = game:GetService("Players").LocalPlayer
