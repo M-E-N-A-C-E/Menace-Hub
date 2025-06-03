@@ -4,7 +4,7 @@
 setclipboard("https://youtube.com/@menace_on_top_fr")
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/liebertsx/Tora-Library/main/src/librarynew",true))()
 local tab = library:CreateWindow("Infinite Sheckles")
-local folder = tab:AddFolder("Here")
+local folder = tab:AddFolder("Toggles")
 
 local player = game:GetService("Players").LocalPlayer
 local rs = game:GetService("ReplicatedStorage")
@@ -95,7 +95,7 @@ local function AutoConvertPollinatedFruits(state)
 end
 
 folder:AddToggle({
-    text = "Auto Collect Pollinated Fruits",
+    text = "Auto Collect Pollinated",
     flag = "auto_collect",
     callback = function(v)
         AutoCollectPollinatedFruits(v)
@@ -103,7 +103,7 @@ folder:AddToggle({
 })
 
 folder:AddToggle({
-    text = "Auto Convert Pollinated Fruits",
+    text = "Auto Convert",
     flag = "auto_convert",
     callback = function(v)
         AutoConvertPollinatedFruits(v)
