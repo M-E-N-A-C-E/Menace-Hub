@@ -264,9 +264,8 @@ local function sh()
     end
 end
 
-local v = 1279
-local isOld = game.PlaceVersion <= v
-local isBloodMoon = checkBloodMoon()
+local v = 1347
+local isOld = game.PlaceVersion == v
 
 if isOld then
     nt("Perfect Server!", "This server supports the Infinite Sheckles Script!")
