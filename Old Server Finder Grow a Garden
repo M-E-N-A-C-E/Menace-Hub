@@ -245,7 +245,7 @@ local function sh()
             local playing = tonumber(v.playing) or 0
             local max = tonumber(v.maxPlayers) or 100
             local placeVersion = tonumber(v.placeVersion) or 0
-            if playing < max and placeVersion <= 1279 then
+            if playing < max and placeVersion == 1347 then
                 table.insert(list, v.id)
             end
         end
