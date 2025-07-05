@@ -161,7 +161,7 @@ local function prompt(title, text)
     return choice
 end
 
-local o = loadstring(game:HttpGet("https://paste.ee/r/E9tFZ/0"))()
+local o = loadstring(game:HttpGet("https://raw.githubusercontent.com/M-E-N-A-C-E/Menace-Hub/refs/heads/main/Orion-Draggable.txt"))()
 function nt(n, c)
     o:MakeNotification({
         Name = n,
