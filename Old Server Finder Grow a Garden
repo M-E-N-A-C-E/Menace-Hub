@@ -202,6 +202,8 @@ local function checkBloodMoon()
     return false
 end
 
+local ts = 1473
+local isOld = game.PlaceVersion == ts
 
 local lastHopAttempt = 0
 local function sh()
@@ -252,27 +254,24 @@ local function sh()
     end
 
     if #list > 0 then
-        nt("Server Hop", "Found "..#list.." servers with version ≤ 1473")
+        nt("Server Hop", "Found "..#list.." servers with version ≤ ".. ts)
         task.wait(1)
         nt("Teleporting", "Joining server with old version...")
         task.wait(0.5)
         tp:TeleportToPlaceInstance(game.PlaceId, list[math.random(#list)])
         return true
     else
-        nt("No Servers", "No available servers with version ≤ 1279 found")
+        nt("No Servers", "No available servers with version ≤ found")
         return false
     end
 end
 
-local v = 1473
-local isOld = game.PlaceVersion == v
-
 if isOld then
-    nt("Perfect Server!", "This server supports the Infinite Sheckles Script!")
+    nt("Old Server Detected!", "This is an old server. Server Version: ".. ts)
 else
     nt("New Server Detected!", "Version: " .. game.PlaceVersion)
     task.wait(0.5)
-    nt("Searching...", "Looking for a server with version ≤ 1473...")
+    nt("Searching...", "Looking for a server with version ≤ ".. ts .."...")
     local success = sh()
     if not success then
         task.wait(5)
