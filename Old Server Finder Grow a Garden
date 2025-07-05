@@ -252,7 +252,7 @@ local function sh()
     end
 
     if #list > 0 then
-        nt("Server Hop", "Found "..#list.." servers with version ≤ 1279")
+        nt("Server Hop", "Found "..#list.." servers with version ≤ 1473")
         task.wait(1)
         nt("Teleporting", "Joining server with old version...")
         task.wait(0.5)
@@ -264,7 +264,7 @@ local function sh()
     end
 end
 
-local v = 1347
+local v = 1473
 local isOld = game.PlaceVersion == v
 
 if isOld then
@@ -272,7 +272,7 @@ if isOld then
 else
     nt("New Server Detected!", "Version: " .. game.PlaceVersion)
     task.wait(0.5)
-    nt("Searching...", "Looking for a server with version ≤ 1279...")
+    nt("Searching...", "Looking for a server with version ≤ 1473...")
     local success = sh()
     if not success then
         task.wait(5)
