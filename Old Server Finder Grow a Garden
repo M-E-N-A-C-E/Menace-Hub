@@ -202,7 +202,7 @@ local function checkBloodMoon()
     return false
 end
 
-local ts = 1510
+local ts = 1660
 local isOld = game.PlaceVersion == ts
 
 local lastHopAttempt = 0
@@ -247,7 +247,7 @@ local function sh()
             local playing = tonumber(v.playing) or 0
             local max = tonumber(v.maxPlayers) or 100
             local placeVersion = tonumber(v.placeVersion) or 0
-            if playing < max and placeVersion == 1510 then
+            if playing < max and placeVersion == ts then
                 table.insert(list, v.id)
             end
         end
@@ -261,7 +261,7 @@ local function sh()
         tp:TeleportToPlaceInstance(game.PlaceId, list[math.random(#list)])
         return true
     else
-        nt("No Servers", "No available servers with version ≤ found")
+        nt("No Servers", "No available servers with version ≤ ".. ts .." found")
         return false
     end
 end
