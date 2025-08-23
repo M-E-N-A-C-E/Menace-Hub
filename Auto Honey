@@ -1,0 +1,121 @@
+-- this is not made by me
+-- credits to Sen (sockks1) in discord!
+-- sub to my channel!!
+setclipboard("https://youtube.com/@menace_on_top_fr")
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/liebertsx/Tora-Library/main/src/librarynew",true))()
+local tab = library:CreateWindow("Auto Honey Quest")
+local folder = tab:AddFolder("Toggles")
+
+local player = game:GetService("Players").LocalPlayer
+local rs = game:GetService("ReplicatedStorage")
+
+local function AutoCollectPollinatedFruits(state)
+    autoCollectPollinatedEnabled = state
+    local pickup_radius = 50
+
+    if state then
+        autoCollectPollinatedThread = task.spawn(function()
+            local farm_model
+            for _, farm in ipairs(workspace.Farm:GetChildren()) do
+                local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
+                if data and data:FindFirstChild("Owner") and data.Owner.Value == player.Name then
+                    farm_model = farm
+                    break
+                end
+            end
+
+            while autoCollectPollinatedEnabled and farm_model and task.wait() do
+                local plants_folder = farm_model.Important:FindFirstChild("Plants_Physical")
+                if plants_folder and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local playerPosition = player.Character.HumanoidRootPart.Position
+
+                    for _, plant_model in ipairs(plants_folder:GetChildren()) do
+                        if plant_model:IsA("Model") then
+                            local fruits = plant_model:FindFirstChild("Fruits")
+                            if fruits then
+                                for _, fruit_model in ipairs(fruits:GetChildren()) do
+                                    if fruit_model:GetAttribute("Pollinated") == true then
+                                        for _, part in ipairs(fruit_model:GetDescendants()) do
+                                            if part:IsA("BasePart") then
+                                                local prompt = part:FindFirstChildOfClass("ProximityPrompt")
+                                                if prompt then
+                                                    local fruitPosition = part.Position
+                                                    local distance = (fruitPosition - playerPosition).Magnitude
+                                                    
+                                                    if distance <= pickup_radius then
+                                                        fireproximityprompt(prompt)
+                                                        task.wait(0.05)
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    else
+        if autoCollectPollinatedThread then
+            task.cancel(autoCollectPollinatedThread)
+            autoCollectPollinatedThread = nil
+        end
+    end
+end
+
+local function AutoConvertPollinatedFruits(state)
+    autoConvertPollinatedEnabled = state
+    
+    if state then
+        autoConvertPollinatedThread = task.spawn(function()
+            while autoConvertPollinatedEnabled and task.wait(0.5) do
+                for _, tool in ipairs(player.Backpack:GetChildren()) do
+                    if tool:IsA("Tool") and (string.find(tool.Name:lower(), "pollinated") or string.find(tool.Name:lower(), "pollunated")) then
+                        local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+                        if humanoid then
+                            humanoid:EquipTool(tool)
+                            task.wait(0.2)
+                            
+                            local args = {"MachineInteract"}
+                            rs:WaitForChild("GameEvents"):WaitForChild("HoneyMachineService_RE"):FireServer(unpack(args))
+                            task.wait(0.5)
+                        end
+                    end
+                end
+            end
+        end)
+    else
+        if autoConvertPollinatedThread then
+            task.cancel(autoConvertPollinatedThread)
+            autoConvertPollinatedThread = nil
+        end
+    end
+end
+
+folder:AddToggle({
+    text = "Auto Collect Pollinated",
+    flag = "auto_collect",
+    callback = function(v)
+        AutoCollectPollinatedFruits(v)
+    end
+})
+
+folder:AddToggle({
+    text = "Auto Convert",
+    flag = "auto_convert",
+    callback = function(v)
+        AutoConvertPollinatedFruits(v)
+    end
+})
+
+folder:AddToggle({
+    text = "Toggle Auto Honey",
+    flag = "toggle",
+    callback = function(v)
+        running = v
+    end
+})
+
+library:Init()
